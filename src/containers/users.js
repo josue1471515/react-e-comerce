@@ -4,7 +4,7 @@ import UserPage from '../pages/users/create';
 class UserCreate extends React.Component{
     render() {
         return (
-                <UserPage />
+                <UserPage title="hola josue" />
                 );
     }
 }

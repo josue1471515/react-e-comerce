@@ -1,7 +1,12 @@
 import React from 'react';
-
+import Layout from '../../components/layout'
 function UserPage(props){
-    return (<div>Usuarios crear</div>);
+    return (
+        <Layout titulo="hola que tal"/>
+        
+
+       
+        );
 }
 
 export default UserPage;
