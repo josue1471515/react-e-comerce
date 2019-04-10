@@ -1,11 +1,10 @@
 import React from 'react';
-import UserPage from '../pages/users/create';
+import UserCreatePage from '../pages/users/create';
 
-class UserCreate extends React.Component{
+export default class UserCreate extends React.Component{
     render() {
         return (
-                <UserPage title="hola josue" />
+                <UserCreatePage title="hola josue" />
                 );
     }
 }
-export default UserCreate;
