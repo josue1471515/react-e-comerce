@@ -2,6 +2,7 @@ import React from 'react';
 import UserCreatePage from '../pages/users/create';
 import UserEditPage from '../pages/users/edit';
 import UserDeletePage from '../pages/users/delete';
+import UserListPage from '../pages/users/list';
 
  class UserCreate extends React.Component{
     render() {
@@ -27,4 +28,13 @@ class UserEdit extends React.Component{
     }
 }
 
-export default {UserCreate,UserEdit,UserDelete};
+class UserList extends React.Component{
+    render() {
+        return (
+                <UserListPage title="hola josue" />
+                );
+    }
+}
+
+
+export default {UserCreate,UserEdit,UserList,UserList};

@@ -16,7 +16,6 @@ class NavPage extends Component {
               <span className="navbar-toggler-icon"></span>
             </button>
             <a className="navbar-brand" href="#">  <img src={logo} className="App-logo" alt="logo" /></a>
-
             <div className="collapse navbar-collapse " id="navbarTogglerDemo03">
               <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li className="nav-item active">
@@ -28,16 +27,19 @@ class NavPage extends Component {
                 <li className="nav-item mt-2 mt-md-0">
                   <Link to={'/about'} className="nav-link">About</Link>
                 </li>
+                <li className="nav-item mt-2 mt-md-0">
+                  <Link to={'/list'} className="nav-link">List Users</Link>
+                </li>
               </ul>
               <ul className="navbar-nav">
                 <li className="nav-item  ">
-                  <a className="nav-link" href="#"><FaOpencart size={25} /></a>
+                  <a className="nav-link" href="/"><FaOpencart size={25} /></a>
                 </li>
-                <li className="nav-item  ">
-                  <a className="nav-link  " href="#">Login</a>
+                <li className="nav-item">
+                  <a className="nav-link" href="/">Login</a>
                 </li>
-                <li className="nav-item  ">
-                  <a className="nav-link  " href="#">Register</a>
+                <li className="nav-item">
+                  <a className="nav-link  " href="/">Register</a>
                 </li>
               </ul>
             </div>
@@ -47,6 +49,7 @@ class NavPage extends Component {
             <Route exact path='/' component={UserCreate.UserCreate} />
             <Route path='/contact' component={UserCreate.UserDelete} />
             <Route path='/about' component={UserCreate.UserEdit} />
+            <Route path='/list' component={UserCreate.UserList} />
           </Switch>
         </div>
       </Router>

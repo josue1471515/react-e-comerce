@@ -1,94 +1,99 @@
 
-import Layout from '../../components/layout'
 import React, { Component } from 'react';
-import './style.css';
+import axios from "axios";
 
 class UserPage extends Component {
     constructor(props) {
         super(props);
         //to access
-        this.onChangeUserName = this.onChangeUserName.bind(this);
-        this.onChangeUserEmail = this.onChangeUserEmail.bind(this);
+        this.onChangeuserName = this.onChangeuserName.bind(this);
+        this.onChangeuserEmail = this.onChangeuserEmail.bind(this);
         this.onChangeUserPassword = this.onChangeUserPassword.bind(this);
         this.onChangeUserPasswordCheck = this.onChangeUserPasswordCheck.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-                createUserName:'',
-                createUserEmail:'',
-                createUserPassword:'',
-                createUserCheckPassword:'',
-                createUserCompleted:false
+            userName: '',
+            userEmail: '',
+            userPassword: '',
+            userCheckPassword: '',
+            userCompleted: false
         }
     };
 
-    onChangeUserName(e){
+    onChangeuserName(e) {
         this.setState({
-            createUserName:e.target.value
+            userName: e.target.value
         });
     }
 
-    onChangeUserEmail(e){
+    onChangeuserEmail(e) {
         this.setState({
-            createUserEmail:e.target.value
+            userEmail: e.target.value
         });
     }
-    onChangeUserPassword(e){
+    onChangeUserPassword(e) {
         this.setState({
-            createUserPassword:e.target.value
-        });
-    }
-
-    onChangeUserPasswordCheck(e){
-        this.setState({
-            createUserCheckPassword:e.target.value
+            userPassword: e.target.value
         });
     }
 
-onSubmit(e){
-    e.preventDefault();
-    console.log("make submit");
-    console.log("make submit"+this.state.createUserCheckPassword);
-    console.log("make submit"+this.state.createUserCompleted);
-    console.log("make submit"+this.state.createUserName);
-    console.log("make submit"+this.state.createUserPassword);
+    onChangeUserPasswordCheck(e) {
+        this.setState({
+            userCheckPassword: e.target.value
+        });
+    }
 
+    onSubmit(e) {
+        e.preventDefault();
+        console.log("make submit ");
+        console.log("make submit " + this.state.userCheckPassword);
+        console.log("make submi t" + this.state.userCompleted);
+        console.log("make submit " + this.state.userName);
+        console.log("make submit " + this.state.userPassword);
 
-    this.setState(
-        {
-            createUserName:'',
-            createUserEmail:'',
-            createUserPassword:'',
-            createUserCheckPassword:'',
-            createUserCompleted:false
-        }
-    )
-}
+        const newUser =({
+            userName:this.state.userName,
+            userPassword:this.state.userPassword,
+            userEmail:this.state.userEmail,
+        }) 
+
+        axios.post('http://localhost:5000/add',newUser)
+        .then(res => console.log(res.data));
+
+        this.setState(
+            {
+                userName: '',
+                userEmail: '',
+                userPassword: '',
+                userCheckPassword: '',
+                userCompleted: false
+            }
+        )
+    }
 
     render() {
-         const { item } = this.props;
-      
+        const { item } = this.props;
+
         return (
             <React.Fragment>
-
-
                 <form className="form-signin" onSubmit={this.onSubmit}>
                     <div className="form-group">
-                        <label for="inputUsername">User name</label>
-                        <input type="email" value={this.state.onChangeUserName}  onChange={this.onChangeUserName} className="form-control" id="inputUsername" aria-describedby="emailHelp" placeholder="User name" />
+                        <label for="inputuserName">User name</label>
+                        <input type="text" value={this.state.onChangeuserName} onChange={this.onChangeuserName} className="form-control" id="inputuserName" placeholder="User name" />
                     </div>
                     <div className="form-group">
                         <label for="inputEmail">Email address</label>
-                        <input type="email" className="form-control" id="inputEmail" value={this.state.createUserEmail}  onChange={this.onChangeUserEmail}  aria-describedby="emailHelp" placeholder="Enter email" />
+                        <input type="email" className="form-control" id="inputEmail" value={this.state.userEmail} onChange={this.onChangeuserEmail} aria-describedby="emailHelp" placeholder="Enter email" />
                         <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div className="form-group">
                         <label for="inputPassword">Password</label>
-                        <input type="password" className="form-control" value={this.state.onChangeUserPassword}  onChange={this.onChangeUserPassword} id="inputPassword" placeholder="Password" />
+                        <input type="password" className="form-control" value={this.state.onChangeUserPassword} onChange={this.onChangeUserPassword} id="inputPassword" placeholder="Password" />
                     </div>
                     <div className="form-group">
                         <label for="inputPasswordCheck">Confirm Password</label>
-                        <input type="password" className="form-control" id="inputPasswordCheck" value={this.state.createUserCheckPassword}  onChange={this.createUserCheckPassword} aria-describedby="emailHelp" placeholder="Confirm Password" />
+                        <input type="password" className="form-control" id="inputPasswordCheck" value={this.state.onChangeUserPasswordCheck} onChange={this.userCheckPassword} placeholder="Confirm Password" />
                     </div>
                     <button type="submit" className="btn btn-primary">Create Account</button>
                 </form>
