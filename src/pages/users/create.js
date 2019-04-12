@@ -80,7 +80,7 @@ class UserPage extends Component {
                 <form className="form-signin" onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label for="inputuserName">User name</label>
-                        <input type="text" value={this.state.onChangeuserName} onChange={this.onChangeuserName} className="form-control" id="inputuserName" placeholder="User name" />
+                        <input type="text" value={this.state.userName} onChange={this.onChangeuserName} className="form-control" id="inputuserName" placeholder="User name" />
                     </div>
                     <div className="form-group">
                         <label for="inputEmail">Email address</label>
@@ -89,11 +89,11 @@ class UserPage extends Component {
                     </div>
                     <div className="form-group">
                         <label for="inputPassword">Password</label>
-                        <input type="password" className="form-control" value={this.state.onChangeUserPassword} onChange={this.onChangeUserPassword} id="inputPassword" placeholder="Password" />
+                        <input type="password" className="form-control" value={this.state.userPassword} onChange={this.onChangeUserPassword} id="inputPassword" placeholder="Password" />
                     </div>
                     <div className="form-group">
                         <label for="inputPasswordCheck">Confirm Password</label>
-                        <input type="password" className="form-control" id="inputPasswordCheck" value={this.state.onChangeUserPasswordCheck} onChange={this.userCheckPassword} placeholder="Confirm Password" />
+                        <input type="password" className="form-control" id="inputPasswordCheck" value={this.state.userCheckPassword} onChange={this.userCheckPassword} placeholder="Confirm Password" />
                     </div>
                     <button type="submit" className="btn btn-primary">Create Account</button>
                 </form>

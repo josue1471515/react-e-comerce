@@ -13,9 +13,10 @@ import UserListPage from '../pages/users/list';
 }
 
 class UserEdit extends React.Component{
+ 
     render() {
         return (
-                <UserEditPage title="hola josue" />
+                <UserEditPage title="hola josue" idUser = {this.props.match.params.id} props = {this.props} />
                 );
     }
 }

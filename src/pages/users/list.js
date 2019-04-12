@@ -23,7 +23,7 @@ const UserCard = props => (
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">
                         <Link to={"/delete/" + props.user._id} className="btn btn-sm btn-outline-secondary" role="button"  >Eliminar</Link>
-                  
+
                         <Link to={"/edit/" + props.user._id} className="btn btn-sm btn-outline-secondary" role="button" >Editar</Link>
                     </div>
                     <small className="text-muted">9 mins</small>
@@ -50,6 +50,15 @@ class UserEditPage extends Component {
             });
     }
 
+    componentDidUpdate() {
+        axios.get('http://localhost:5000/')
+            .then(resp => {
+                this.setState({ users: resp.data });
+            }).catch(function (error) {
+                console.log(error);
+            });
+    }
+
     userList() {
         return this.state.users.map(function (params, i) {
             return <UserCard user={params} key={i} />;
@@ -60,6 +69,7 @@ class UserEditPage extends Component {
 
         return (
             <React.Fragment>
+                
                 <div className="album py-5 bg-light">
                     <div className="container">
                         <div className="row">

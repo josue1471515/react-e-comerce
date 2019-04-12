@@ -46,9 +46,9 @@ class NavPage extends Component {
           </nav>
           <hr />
           <Switch>
-            <Route exact path='/' component={UserCreate.UserCreate} />
+            <Route exact path='/' component={UserCreate.UserList} />
             <Route path='/contact' component={UserCreate.UserDelete} />
-            <Route path='/about' component={UserCreate.UserEdit} />
+            <Route path='/edit/:id' component={UserCreate.UserEdit} />
             <Route path='/list' component={UserCreate.UserList} />
           </Switch>
         </div>
