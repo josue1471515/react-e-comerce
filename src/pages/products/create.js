@@ -1,7 +1,9 @@
 
 import React, { Component } from 'react';
 import axios from "axios";
-
+import Upload from '../../components/displayImg';
+import Carousel from '../../components/carousel';
+import './style.css'
 // `product_id`       INT           NOT NULL  AUTO_INCREMENT,
 // `name`             VARCHAR(100)  NOT NULL,
 // `description`      VARCHAR(1000) NOT NULL,
@@ -21,7 +23,7 @@ class UserPage extends Component {
         this.onChangeProductPrice = this.onChangeProductPrice.bind(this);
         this.onChangeProductDiscountedPrice = this.onChangeProductDiscountedPrice.bind(this);
         this.onChangeProductThumbnail = this.onChangeProductThumbnail.bind(this);
- 
+
         this.state = {
             productName: '',
             productDescription: '',
@@ -63,19 +65,19 @@ class UserPage extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const newUser =({
-            productName:this.state.productName,
-            productDescription:this.state.productDescription,
-            productPrice:this.state.productPrice,
-            productDiscountedPrice:this.state.productDiscountedPrice,
-            productThumbnail:this.state.productThumbnail,
-        }) 
+        const newUser = ({
+            productName: this.state.productName,
+            productDescription: this.state.productDescription,
+            productPrice: this.state.productPrice,
+            productDiscountedPrice: this.state.productDiscountedPrice,
+            productThumbnail: this.state.productThumbnail,
+        })
 
-        axios.post('http://localhost:5000/add',newUser)
-        .then(res => console.log(res.data));
-       
-       
-   
+        axios.post('http://localhost:5000/add', newUser)
+            .then(res => console.log(res.data));
+
+
+
         this.setState(
             {
                 productName: '',
@@ -92,24 +94,36 @@ class UserPage extends Component {
 
         return (
             <React.Fragment>
-                <form className="form-signin" onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label for="inputuserName">User name</label>
-                        <input type="text" value={this.state.userName} onChange={this.onChangeuserName} className="form-control" id="inputuserName" placeholder="User name" />
+                <form className="container" onSubmit={this.onSubmit}>
+                    <div>
+                        <h2>
+                            Create Product
+                        </h2>
+                       <br></br>  
                     </div>
                     <div className="form-group">
-                        <label for="inputEmail">Email address</label>
-                        <input type="email" className="form-control" id="inputEmail" value={this.state.userEmail} onChange={this.onChangeuserEmail} aria-describedby="emailHelp" placeholder="Enter email" />
-                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+
+                        <label htmlFor="inputProductName">Product Name</label>
+                        <input type="text" value={this.state.productName} onChange={this.onChangeProductName} className="form-control" id="inputProductName" placeholder="Product name" />
                     </div>
                     <div className="form-group">
-                        <label for="inputPassword">Password</label>
-                        <input type="password" className="form-control" value={this.state.userPassword} onChange={this.onChangeUserPassword} id="inputPassword" placeholder="Password" />
+                        <label htmlFor="inputDescription">Product Description</label>
+                        <textarea name="Text1" className="form-control" id="inputDescription" value={this.state.productDescription} onChange={this.onChangeProductDescription} cols="40" rows="5" placeholder="Enter Description"></textarea>
+                        <small id="ProductHelp" className="form-text text-muted">Give the best description of your product.</small>
                     </div>
                     <div className="form-group">
-                        <label for="inputPasswordCheck">Confirm Password</label>
+                        <label htmlFor="inputProductPrice">Price</label>
+                        <input type="number" className="form-control" value={this.state.userPassword} onChange={this.onChangeUserPassword} id="inputProductPrice" placeholder="Price Product" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="inputPasswordCheck">Confirm Password</label>
                         <input type="password" className="form-control" id="inputPasswordCheck" value={this.state.userCheckPassword} onChange={this.userCheckPassword} placeholder="Confirm Password" />
                     </div>
+                    <div className="form-group text-center">
+                        <Upload />
+
+                    </div>
+                    <Carousel/>
                     <button type="submit" className="btn btn-primary">Create Account</button>
                 </form>
             </React.Fragment>

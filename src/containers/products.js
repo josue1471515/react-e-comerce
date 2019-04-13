@@ -38,4 +38,4 @@ class ProductList extends React.Component{
 }
 
 
-export default {UserCreate,UserEdit,UserList,UserList};
+export default {ProductList,ProductDelete,ProductEdit,ProductCreate};

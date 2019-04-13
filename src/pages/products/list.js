@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const divStyle = { height: '225px', width: '100%', display: 'block' };
-const UserCard = props => (
+const ProductCard = props => (
 
     <div className="col-md-4">
         <div className="card mb-4 box-shadow">
@@ -12,19 +12,21 @@ const UserCard = props => (
             <div className="card-body">
                 <p className="card-text">User Description</p>
                 <div className="form-group">
-                    <label htmlFor="inputPassword">{props.user.userName}</label>
+
+                    {/* productThumbnail: '', */}
+                    <label htmlFor="inputPassword">{props.product.productName}</label>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="inputPassword">{props.user.userPassword}</label>
+                    <label htmlFor="inputPassword">{props.product.productDescription}</label>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="inputPassword">{props.user.userEmail}</label>
+                    <label htmlFor="inputPassword">{props.product.productPrice}</label>
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">
-                        <Link to={"/delete/" + props.user._id} className="btn btn-sm btn-outline-secondary" role="button"  >Eliminar</Link>
+                        <Link to={"/products/delete/" + props.product._id} className="btn btn-sm btn-outline-secondary" role="button"  >Eliminar</Link>
 
-                        <Link to={"/edit/" + props.user._id} className="btn btn-sm btn-outline-secondary" role="button" >Editar</Link>
+                        <Link to={"/products/edit/" + props.product._id} className="btn btn-sm btn-outline-secondary" role="button" >Editar</Link>
                     </div>
                     <small className="text-muted">9 mins</small>
                 </div>
@@ -38,30 +40,30 @@ class UserEditPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { users: [] }
+        this.state = { products: [] }
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/')
+        axios.get('http://localhost:5000/products/')
             .then(resp => {
-                this.setState({ users: resp.data });
+                this.setState({ products: resp.data });
             }).catch(function (error) {
                 console.log(error);
             });
     }
 
     componentDidUpdate() {
-        axios.get('http://localhost:5000/')
+        axios.get('http://localhost:5000/products/')
             .then(resp => {
-                this.setState({ users: resp.data });
+                this.setState({ products: resp.data });
             }).catch(function (error) {
                 console.log(error);
             });
     }
 
-    userList() {
-        return this.state.users.map(function (params, i) {
-            return <UserCard user={params} key={i} />;
+    productList() {
+        return this.state.products.map(function (params, i) {
+            return <ProductCard product={params} key={i} />;
         });
     }
 
@@ -69,12 +71,12 @@ class UserEditPage extends Component {
 
         return (
             <React.Fragment>
-                
+
                 <div className="album py-5 bg-light">
                     <div className="container">
                         <div className="row">
 
-                            {this.userList()}
+                            {this.productList()}
 
                         </div>
 

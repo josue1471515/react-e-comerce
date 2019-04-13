@@ -5,6 +5,7 @@ import  'bootstrap/dist/css/bootstrap.min.css'
 import { FaOpencart } from 'react-icons/fa';
 import { BrowserRouter as Router,Switch, Route, Link } from 'react-router-dom';
 import UserCreate from '../../containers/users';
+import ProductCreate from '../../containers/products';
 
 class NavPage extends Component {
   render() {
@@ -22,7 +23,7 @@ class NavPage extends Component {
                   <Link to={'/'} className="nav-link"> Home </Link>
                 </li>
                 <li className="nav-item mt-2 mt-md-0">
-                  <Link to={'/contact'} className="nav-link">Products</Link>
+                  <Link to={'/products/list'} className="nav-link">Products</Link>
                 </li>
                 <li className="nav-item mt-2 mt-md-0">
                   <Link to={'/about'} className="nav-link">About</Link>
@@ -51,9 +52,9 @@ class NavPage extends Component {
             <Route path='/users/edit/:id' component={UserCreate.UserEdit} />
             <Route path='/users/create' component={UserCreate.UserCreate} />
 
-            <Route exact path='/products/list' component={UserCreate.UserList} />
-            <Route path='/products/edit/:id' component={UserCreate.UserEdit} />
-            <Route path='/products/create' component={UserCreate.UserCreate} />
+            <Route path='/products/list' component={ProductCreate.ProductList} />
+            <Route path='/products/edit/:id' component={ProductCreate.ProductEdit} />
+            <Route path='/products/create' component={ProductCreate.ProductCreate} />
           </Switch>
         </div>
       </Router>

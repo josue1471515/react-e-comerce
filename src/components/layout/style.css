@@ -20,3 +20,9 @@
     
 
   }
+
+
+  .container {
+    max-width: 960px;
+    background-color: rgba(210, 208, 230, 0.63);
+}
