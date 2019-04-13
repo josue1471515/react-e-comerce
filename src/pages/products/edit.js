@@ -1,8 +1,9 @@
+import Layout from '../../components/layout'
 import React, { Component } from 'react';
 import './style.css';
 import axios from 'axios';
 import {withRouter} from "react-router-dom";
-import GlobalConfig from '../../config';
+
 class UserEditPage extends Component {
     constructor(props) {
         super(props);
@@ -22,8 +23,9 @@ class UserEditPage extends Component {
 
     componentDidMount(){
 
-        axios.get(GlobalConfig.hostApi+this.props.idUser)
+        axios.get('http://localhost:5000/'+this.props.idUser)
         .then(response => {
+            console.log(response);
             this.setState({
                 userEmail: response.data.userEmail,
                 userName: response.data.userName,
@@ -66,7 +68,7 @@ class UserEditPage extends Component {
             userEmail:this.state.userEmail,
         }) 
 
-        axios.post(GlobalConfig.hostApi+'update/'+this.props.idUser,updateUser)
+        axios.post('http://localhost:5000/update/'+this.props.idUser,updateUser)
         .then(res => console.log(res.data));
 
         this.setState(
@@ -79,7 +81,7 @@ class UserEditPage extends Component {
             }
         );
 
-        this.props.history.push("/users/list");
+        this.props.history.push("/list");
     }
 
     render() {

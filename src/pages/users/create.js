@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react';
 import axios from "axios";
-
+import GlobalConfig from '../../config';
+import {withRouter} from "react-router-dom";
 class UserPage extends Component {
     constructor(props) {
         super(props);
@@ -58,7 +59,7 @@ class UserPage extends Component {
             userEmail:this.state.userEmail,
         }) 
 
-        axios.post('http://localhost:5000/add',newUser)
+        axios.post(GlobalConfig.hostApi+'add',newUser)
         .then(res => console.log(res.data));
 
         this.setState(
@@ -70,6 +71,7 @@ class UserPage extends Component {
                 userCompleted: false
             }
         )
+        this.props.history.push("/users/list");
     }
 
     render() {
@@ -93,7 +95,7 @@ class UserPage extends Component {
                     </div>
                     <div className="form-group">
                         <label for="inputPasswordCheck">Confirm Password</label>
-                        <input type="password" className="form-control" id="inputPasswordCheck" value={this.state.userCheckPassword} onChange={this.userCheckPassword} placeholder="Confirm Password" />
+                        <input type="password" className="form-control" id="inputPasswordCheck" value={this.state.userCheckPassword} onChange={this.onChangeUserPasswordCheck} placeholder="Confirm Password" />
                     </div>
                     <button type="submit" className="btn btn-primary">Create Account</button>
                 </form>
@@ -102,4 +104,5 @@ class UserPage extends Component {
     }
 }
 
-export default UserPage;
+
+export default withRouter(UserPage);

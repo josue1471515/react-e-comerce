@@ -4,6 +4,8 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom'
 import Layout from './components/layout/index'
 
+
+
 ReactDOM.render(<BrowserRouter>
     <Layout />
   </BrowserRouter>, document.getElementById('root'));

@@ -16,7 +16,7 @@ class UserEdit extends React.Component{
  
     render() {
         return (
-                <UserEditPage title="hola josue" idUser = {this.props.match.params.id} props = {this.props} />
+                <UserEditPage title="hola josue" idUser = {this.props.match.params.id}  />
                 );
     }
 }

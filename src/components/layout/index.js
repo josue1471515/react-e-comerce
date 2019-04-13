@@ -22,13 +22,13 @@ class NavPage extends Component {
                   <Link to={'/'} className="nav-link"> Home </Link>
                 </li>
                 <li className="nav-item mt-2 mt-md-0">
-                  <Link to={'/contact'} className="nav-link">Contact</Link>
+                  <Link to={'/contact'} className="nav-link">Products</Link>
                 </li>
                 <li className="nav-item mt-2 mt-md-0">
                   <Link to={'/about'} className="nav-link">About</Link>
                 </li>
                 <li className="nav-item mt-2 mt-md-0">
-                  <Link to={'/list'} className="nav-link">List Users</Link>
+                  <Link to={'/users/list'} className="nav-link">List Users</Link>
                 </li>
               </ul>
               <ul className="navbar-nav">
@@ -39,17 +39,21 @@ class NavPage extends Component {
                   <a className="nav-link" href="/">Login</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link  " href="/">Register</a>
+                  <a className="nav-link  " href="/users/create">Register</a>
                 </li>
               </ul>
             </div>
           </nav>
           <hr />
           <Switch>
-            <Route exact path='/' component={UserCreate.UserList} />
+            <Route exact path='/users/list' component={UserCreate.UserList} />
             <Route path='/contact' component={UserCreate.UserDelete} />
-            <Route path='/edit/:id' component={UserCreate.UserEdit} />
-            <Route path='/list' component={UserCreate.UserList} />
+            <Route path='/users/edit/:id' component={UserCreate.UserEdit} />
+            <Route path='/users/create' component={UserCreate.UserCreate} />
+
+            <Route exact path='/products/list' component={UserCreate.UserList} />
+            <Route path='/products/edit/:id' component={UserCreate.UserEdit} />
+            <Route path='/products/create' component={UserCreate.UserCreate} />
           </Switch>
         </div>
       </Router>
