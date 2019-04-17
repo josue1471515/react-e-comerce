@@ -2,81 +2,93 @@ import React, { Component } from 'react';
 import './style.css';
 import axios from 'axios';
 import {withRouter} from "react-router-dom";
-
-class UserEditPage extends Component {
+import Upload from '../../components/upload';
+class ProductEditPage extends Component {
     constructor(props) {
         super(props);
-        this.onChangeuserName = this.onChangeuserName.bind(this);
-        this.onChangeuserEmail = this.onChangeuserEmail.bind(this);
-        this.onChangeUserPassword = this.onChangeUserPassword.bind(this);
-        this.onChangeUserPasswordCheck = this.onChangeUserPasswordCheck.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        //to access
+        this.onChangeProductName = this.onChangeProductName.bind(this);
+        this.onChangeProductDescription = this.onChangeProductDescription.bind(this);
+        this.onChangeProductPrice = this.onChangeProductPrice.bind(this);
+        this.onChangeProductDiscountedPrice = this.onChangeProductDiscountedPrice.bind(this);
+        this.onChangeProductThumbnail = this.onChangeProductThumbnail.bind(this);
 
-        this.state={
-            userName:'',
-            userEmail:'',
-            userPassword:'',
-        };
-        
+        this.state = {
+            productName: '',
+            productDescription: '',
+            productPrice: '',
+            productDiscountedPrice: '',
+            productThumbnail: '',
+        }
     };
 
     componentDidMount(){
 
-        axios.get('http://localhost:5000/'+this.props.idUser)
+        axios.get('http://localhost:5000/product/'+this.props.idProduct)
         .then(response => {
-            console.log(response);
             this.setState({
-                userEmail: response.data.userEmail,
-                userName: response.data.userName,
-                userPassword: response.data.userPassword,
+                productName: response.data.productName,
+                productDescription: response.data.productDescription,
+                productPrice: response.data.productPrice,
+                productDiscountedPrice: response.data.productDiscountedPrice,
+                productThumbnail: response.data.productThumbnail,
             });
         }).catch(function(err){
             console.log(err);
         })
     }
 
-    onChangeuserName(e) {
+    onChangeProductName(e) {
         this.setState({
-            userName: e.target.value
+            productName: e.target.value
         });
     }
 
-    onChangeuserEmail(e) {
+    onChangeProductDescription(e) {
         this.setState({
-            userEmail: e.target.value
+            productDescription: e.target.value
         });
     }
-    onChangeUserPassword(e) {
+    onChangeProductPrice(e) {
         this.setState({
-            userPassword: e.target.value
+            productPrice: e.target.value
         });
     }
 
-    onChangeUserPasswordCheck(e) {
+    onChangeProductDiscountedPrice(e) {
         this.setState({
-            userCheckPassword: e.target.value
+            productDiscountedPrice: e.target.value
         });
     }
+
+    onChangeProductThumbnail(e) {
+        this.setState({
+            productThumbnail: e.target.value
+        });
+    }
+
 
     onSubmit(e) {
         e.preventDefault();
 
-        const updateUser =({
-            userName:this.state.userName,
-            userPassword:this.state.userPassword,
-            userEmail:this.state.userEmail,
+        const updateProduct =({
+            productName: this.state.productName,
+            productDescription: this.state.productDescription,
+            productPrice: this.state.productPrice,
+            productDiscountedPrice: this.state.productDiscountedPrice,
+            productThumbnail: this.state.productThumbnail,
         }) 
 
-        axios.post('http://localhost:5000/update/'+this.props.idUser,updateUser)
+        axios.post('http://localhost:5000/products/update/'+this.props.idProduct,updateProduct)
         .then(res => console.log(res.data));
 
         this.setState(
             {
-                userName: '',
-                userEmail: '',
-                userPassword: '',
-                userCheckPassword: '',
-                userCompleted: false
+                productName: '',
+            productDescription: '',
+            productPrice: '',
+            productDiscountedPrice: '',
+            productThumbnail: '',
             }
         );
 
@@ -88,29 +100,44 @@ class UserEditPage extends Component {
 
         return (
             <React.Fragment>
-                <form className="form-signin" onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="inputuserName">User name</label>
-                        <input type="text" value={this.state.userName} onChange={this.onChangeuserName} className="form-control" id="inputuserName" placeholder="User name" />
+                <form className="container" onSubmit={this.onSubmit}>
+                    <div>
+                        <h2>
+                            Create Product
+                        </h2>
+                        <br></br>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="inputEmail">Email address</label>
-                        <input type="email" className="form-control" id="inputEmail" value={this.state.userEmail} onChange={this.onChangeuserEmail} aria-describedby="emailHelp" placeholder="Enter email" />
-                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+
+                        <label htmlFor="inputProductName">Product Name</label>
+                        <input type="text" value={this.state.productName} onChange={this.onChangeProductName} className="form-control" id="inputProductName" placeholder="Product name" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="inputPassword">Password</label>
-                        <input type="password" className="form-control" value={this.state.userPassword} onChange={this.onChangeUserPassword} id="inputPassword" placeholder="Password" />
+                        <label htmlFor="inputDescription">Product Description</label>
+                        <textarea name="Text1" className="form-control" id="inputDescription" value={this.state.productDescription} onChange={this.onChangeProductDescription} cols="40" rows="5" placeholder="Enter Description"></textarea>
+                        <small id="ProductHelp" className="form-text text-muted">Give the best description of your product.</small>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputPasswordCheck">Confirm Password</label>
-                        <input type="password" className="form-control" id="inputPasswordCheck" value={this.state.userPassword} onChange={this.onChangeUserPasswordCheck} placeholder="Confirm Password" />
+                    <div className="row">
+                        <div className="col" >
+                            <label htmlFor="inputProductPrice">Price</label>
+                            <input type="number" className="form-control" value={this.state.userPassword} onChange={this.onChangeUserPassword} id="inputProductPrice" placeholder="Price Product" />
+                        </div>
+                        <div className="col" >
+                            <label htmlFor="inputDiscountPrice">Discounted Price Password %</label>
+                            <input type="number" className="form-control" id="inputDiscountPrice" value={this.state.userCheckPassword} onChange={this.userCheckPassword} placeholder="Discount " />
+                        </div>
                     </div>
-                    <button type="submit" className="btn btn-primary">Edit Account</button>
+                    <br />
+                    <div className="form-group text-center" >
+                        <Upload />
+                    </div >
+                    <div className="from-group" style = {{paddingBottom:"15px"}} >
+                        <button type="submit" className="btn btn-primary" >Create Account</button>
+                    </div>
                 </form>
             </React.Fragment>
         );
     }
 }
 
-export default withRouter(UserEditPage);
+export default withRouter(ProductEditPage);

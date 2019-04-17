@@ -16,7 +16,7 @@ class ProductEdit extends React.Component{
  
     render() {
         return (
-                <ProductsEditPage title="hola josue" idUser = {this.props.match.params.id}  />
+                <ProductsEditPage title="hola josue" idProduct = {this.props.match.params.id}  />
                 );
     }
 }

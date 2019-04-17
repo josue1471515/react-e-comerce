@@ -1,8 +1,7 @@
 
 import React, { Component } from 'react';
 import axios from "axios";
-import Upload from '../../components/displayImg';
-import Carousel from '../../components/carousel';
+import Upload from '../../components/upload';
 import './style.css'
 // `product_id`       INT           NOT NULL  AUTO_INCREMENT,
 // `name`             VARCHAR(100)  NOT NULL,
@@ -23,7 +22,8 @@ class UserPage extends Component {
         this.onChangeProductPrice = this.onChangeProductPrice.bind(this);
         this.onChangeProductDiscountedPrice = this.onChangeProductDiscountedPrice.bind(this);
         this.onChangeProductThumbnail = this.onChangeProductThumbnail.bind(this);
-
+        this.onChangeImages = this.onChangeImages.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             productName: '',
             productDescription: '',
@@ -62,10 +62,14 @@ class UserPage extends Component {
         });
     }
 
+    onChangeImages(e){
+        console.log(e);
+    }
 
     onSubmit(e) {
         e.preventDefault();
-        const newUser = ({
+        var sss = this;
+        const newProduct = ({
             productName: this.state.productName,
             productDescription: this.state.productDescription,
             productPrice: this.state.productPrice,
@@ -73,7 +77,7 @@ class UserPage extends Component {
             productThumbnail: this.state.productThumbnail,
         })
 
-        axios.post('http://localhost:5000/add', newUser)
+        axios.post('http://localhost:5000/products/add', newProduct)
             .then(res => console.log(res.data));
 
 
@@ -99,7 +103,7 @@ class UserPage extends Component {
                         <h2>
                             Create Product
                         </h2>
-                       <br></br>  
+                        <br></br>
                     </div>
                     <div className="form-group">
 
@@ -111,20 +115,23 @@ class UserPage extends Component {
                         <textarea name="Text1" className="form-control" id="inputDescription" value={this.state.productDescription} onChange={this.onChangeProductDescription} cols="40" rows="5" placeholder="Enter Description"></textarea>
                         <small id="ProductHelp" className="form-text text-muted">Give the best description of your product.</small>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputProductPrice">Price</label>
-                        <input type="number" className="form-control" value={this.state.userPassword} onChange={this.onChangeUserPassword} id="inputProductPrice" placeholder="Price Product" />
+                    <div className="row">
+                        <div className="col" >
+                            <label htmlFor="inputProductPrice">Price</label>
+                            <input type="number" className="form-control" value={this.state.userPassword} onChange={this.onChangeUserPassword} id="inputProductPrice" placeholder="Price Product" />
+                        </div>
+                        <div className="col" >
+                            <label htmlFor="inputDiscountPrice">Discounted Price Password %</label>
+                            <input type="number" className="form-control" id="inputDiscountPrice" value={this.state.userCheckPassword} onChange={this.userCheckPassword} placeholder="Discount " />
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputPasswordCheck">Confirm Password</label>
-                        <input type="password" className="form-control" id="inputPasswordCheck" value={this.state.userCheckPassword} onChange={this.userCheckPassword} placeholder="Confirm Password" />
+                    <br />
+                    <div className="form-group text-center" >
+                        <Upload onChange={this.onChangeImages} />
+                    </div >
+                    <div className="from-group" style = {{paddingBottom:"15px"}} >
+                        <button type="submit" className="btn btn-primary" >Create Account</button>
                     </div>
-                    <div className="form-group text-center">
-                        <Upload />
-
-                    </div>
-                    <Carousel/>
-                    <button type="submit" className="btn btn-primary">Create Account</button>
                 </form>
             </React.Fragment>
         );
