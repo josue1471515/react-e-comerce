@@ -127,7 +127,7 @@ class UserPage extends Component {
                     </div>
                     <br />
                     <div className="form-group text-center" >
-                        <Upload onChange={this.onChangeImages} />
+                        <Upload  />
                     </div >
                     <div className="from-group" style = {{paddingBottom:"15px"}} >
                         <button type="submit" className="btn btn-primary" >Create Account</button>

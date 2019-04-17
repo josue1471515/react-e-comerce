@@ -7,7 +7,8 @@ class Upload extends Component {
     super(props)
     this.state = {
       file: null,
-      fileArray:[]
+      fileArray:[],
+      fieldVal: ""
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -22,12 +23,23 @@ class Upload extends Component {
     })
   }
   }
+
+  
+  onUpdate = (val) => {
+    console.log(val);
+    // this.setState({
+    //   fieldVal: val
+    // })
+  };
+
+
+  
   render() {
     return (
       <div>
         <label htmlFor="imageUpload" className="btn btn-primary btn-block btn-outlined">Select Images</label>
         <input type="file" id="imageUpload" accept="image/*" onChange={this.handleChange}  style={{display : "none"}}/>
-        <Carousel arrayImg ={[this.state.file]}/>
+        <Carousel arrayImg ={[this.state.file]} onUpdate={this.onUpdate} />
       </div>
     );
   }

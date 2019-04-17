@@ -10,14 +10,17 @@ class Carousel extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            img: {},
+            img: [],
             imgHtmlIndicators: [],
             imgHtmlItem: [],
             count: 0,
+            fieldVal: "",
             ignore:true
+
         }
         this.onChangeImg = this.onChangeImg.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.update = this.update.bind(this);
 
     }
 
@@ -27,6 +30,8 @@ class Carousel extends Component {
         });
     }
 
+
+
     componentDidMount() {
         const imgSrc = this.props.arrayImg;
         var imgHtmlIndicators = [];
@@ -35,8 +40,8 @@ class Carousel extends Component {
         if (imgSrc.lenfth > 0) {
 
             imgSrc.forEach(function (value) {
-                const activeItem = '';
-                const activeIndicators = '';
+                let activeItem = '';
+                let activeIndicators = '';
 
                 if (count == 0) {
                     activeItem = "active";
@@ -113,6 +118,8 @@ class Carousel extends Component {
         var imgHtmlItem = this.state.imgHtmlItem;
         const self = this;
         var index = this.state.count;
+        var img = this.state.img;
+        img.push(imgSrc);
         for (let i = 0; i < imgSrc.length; i++) {
             let value = imgSrc[i];
             let activeItem = '';
@@ -124,6 +131,7 @@ class Carousel extends Component {
                 activeItem = "active";
                 activeIndicators = "active";
             }
+            img.push()
             imgHtmlIndicators.push(<li data-target='#carouselExampleIndicators' key={contIndex} data-slide-to={contIndex} className={activeIndicators}  >
                 <img className="d-block " src={value} alt="First slide" />
                 <a aria-label="Close" onClick={(e) => self.handleClick(contIndex)} style={{ width: '50%', height: '50%' }} >
@@ -137,11 +145,22 @@ class Carousel extends Component {
         this.setState({
             imgHtmlIndicators: imgHtmlIndicators,
             imgHtmlItem: imgHtmlItem,
+            img : img,
             count: index
         });
+
+        // passing img array
+        this.props.onUpdate(img);
     }
     
+    update (e){
+        // debugger;
+        // console.log(e.target.value);
+        // this.props.onUpdate(e.target.value);
+        // this.setState({fieldVal: e.target.value});
+      };
 
+    
 
     render() {
         const hasValues = this.state.imgHtmlIndicators.length; 
@@ -165,6 +184,10 @@ class Carousel extends Component {
                             <span className="carousel-control-next-icon" aria-hidden="true"></span>
                             <span className="sr-only">Next</span>
                         </a>
+
+                    </div>
+                    <div onClick={this.handleClick}>
+                    <input id="ulrImg"   type="text"  onChange={this.update }   value={this.state.img}  ></input>
                     </div>
                 </div>
             </React.Fragment>
