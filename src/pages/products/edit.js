@@ -24,7 +24,7 @@ class ProductEditPage extends Component {
 
     componentDidMount(){
 
-        axios.get('http://localhost:5000/product/'+this.props.idProduct)
+        axios.get('http://localhost:5000/product/edit/'+this.props.idProduct)
         .then(response => {
             this.setState({
                 productName: response.data.productName,
